@@ -1,0 +1,14 @@
+CREATE TABLE employees(
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  first_name VARCHAR(100) NOT NULL,
+  middle_name VARCHAR(100) NULL,
+  last_name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  mobile VARCHAR(255) UNIQUE NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  contract_type VARCHAR(255) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NULL,
+  supervisor VARCHAR(255) NOT NULL
+);

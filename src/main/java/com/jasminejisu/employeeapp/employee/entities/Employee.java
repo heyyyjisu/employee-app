@@ -28,50 +28,55 @@ public class Employee {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank (message = "Title is required")
+  @NotNull (message = "Title is required")
   @Enumerated (EnumType.STRING)
+  @Column (nullable = false)
   private Title title;
 
   @NotBlank (message = "First name is required")
   @Size (min = 2, max = 100, message = "First name must be between 2 and 100 characters")
-  @Column (name = "first_name")
+  @Column (name = "first_name", nullable = false, length = 100)
   private String firstName;
 
-  @Column(nullable = true, name = "middle_name")
+  @Size (min = 2, max = 100, message = "Middle name must be between 2 and 100 characters")
+  @Column(nullable = true, name = "middle_name", length = 100)
   private String middleName;
 
   @NotBlank (message = "Last name is required")
   @Size (min = 2, max = 100, message = "Last name must be between 2 and 100 characters")
-  @Column (name="last_name")
+  @Column (name="last_name", nullable = false, length = 100)
   private String lastName;
 
   @NotBlank (message = "Email is required")
   @Email (message = "Please provide a valid email address")
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
 
   @NotBlank (message = "Mobile number is required")
   @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Please provide a valid mobile number")
-  @Column (unique = true)
+  @Column (unique = true, nullable = false)
   private String mobile;
 
   @NotBlank (message = "Residential address is required")
+  @Column (nullable = false)
   private String address;
 
   @NotNull (message = "Contract type is required")
   @Enumerated (EnumType.STRING)
-  @Column (name = "contract_type")
+  @Column (name = "contract_type", nullable = false)
   private ContractType contractType;
 
   @NotNull (message = "Start date is required")
   @PastOrPresent (message = "Start date cannot be in the future")
+  @Column (name = "start_date", nullable = false)
   private LocalDate startDate;
 
   @FutureOrPresent (message = "End date cannot be in the past")
-  @Column(nullable = true)
+  @Column(name = "end_date", nullable = true)
   private LocalDate endDate;
 
   @NotBlank (message = "Supervisor name is required")
+  @Column (nullable = false)
   private String supervisor;
 
 

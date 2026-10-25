@@ -64,6 +64,20 @@
   - @Column only where defaults change
   - enums stored as names (EnumType.STRING)
 
+### 2026-10-21 - Flyway migration setup
+
+- Started the Flyway V1 migration
+- Entity-to-table mapping
+
+### 2026-10-25 - Flyway and seeder
+
+- Ran the app and hig Hibrernate missing table [employees]
+- Found the mismatch: the migration created employee, but entity's @Table expects employees
+- Fixed the CREATE TABLE name to employees
+- Reset the local Flyway history and old table, then re-ran V1
+- Hibernate validation passed
+- Added seeder
+
 ---
 
 ## What did you struggle with?
