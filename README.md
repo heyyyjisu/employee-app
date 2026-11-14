@@ -78,6 +78,11 @@
 - Hibernate validation passed
 - Added seeder
 
+### 2026-10-30 - Test factory and Design pattern
+
+- Added Test Factory Config
+- Learned Java Design Pattern
+
 ---
 
 ## What did you struggle with?

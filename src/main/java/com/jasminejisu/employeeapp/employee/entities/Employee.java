@@ -20,70 +20,67 @@ import jakarta.validation.constraints.Size;
 
 // employee-id, first name, middle name, last name, email, mobile, residential address, title, contract-type, start-date, finish-date or on-going, supervisor
 
-@Entity 
+@Entity
 @Table(name = "employees")
 public class Employee {
 
-  @Id 
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull (message = "Title is required")
-  @Enumerated (EnumType.STRING)
-  @Column (nullable = false)
+  @NotNull(message = "Title is required")
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private Title title;
 
-  @NotBlank (message = "First name is required")
-  @Size (min = 2, max = 100, message = "First name must be between 2 and 100 characters")
-  @Column (name = "first_name", nullable = false, length = 100)
+  @NotBlank(message = "First name is required")
+  @Size(min = 2, max = 100, message = "First name must be between 2 and 100 characters")
+  @Column(name = "first_name", nullable = false, length = 100)
   private String firstName;
 
-  @Size (min = 2, max = 100, message = "Middle name must be between 2 and 100 characters")
+  @Size(min = 2, max = 100, message = "Middle name must be between 2 and 100 characters")
   @Column(nullable = true, name = "middle_name", length = 100)
   private String middleName;
 
-  @NotBlank (message = "Last name is required")
-  @Size (min = 2, max = 100, message = "Last name must be between 2 and 100 characters")
-  @Column (name="last_name", nullable = false, length = 100)
+  @NotBlank(message = "Last name is required")
+  @Size(min = 2, max = 100, message = "Last name must be between 2 and 100 characters")
+  @Column(name = "last_name", nullable = false, length = 100)
   private String lastName;
 
-  @NotBlank (message = "Email is required")
-  @Email (message = "Please provide a valid email address")
+  @NotBlank(message = "Email is required")
+  @Email(message = "Please provide a valid email address")
   @Column(unique = true, nullable = false)
   private String email;
 
-  @NotBlank (message = "Mobile number is required")
+  @NotBlank(message = "Mobile number is required")
   @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Please provide a valid mobile number")
-  @Column (unique = true, nullable = false)
+  @Column(unique = true, nullable = false)
   private String mobile;
 
-  @NotBlank (message = "Residential address is required")
-  @Column (nullable = false)
+  @NotBlank(message = "Residential address is required")
+  @Column(nullable = false)
   private String address;
 
-  @NotNull (message = "Contract type is required")
-  @Enumerated (EnumType.STRING)
-  @Column (name = "contract_type", nullable = false)
+  @NotNull(message = "Contract type is required")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "contract_type", nullable = false)
   private ContractType contractType;
 
-  @NotNull (message = "Start date is required")
-  @PastOrPresent (message = "Start date cannot be in the future")
-  @Column (name = "start_date", nullable = false)
+  @NotNull(message = "Start date is required")
+  @PastOrPresent(message = "Start date cannot be in the future")
+  @Column(name = "start_date", nullable = false)
   private LocalDate startDate;
 
-  @FutureOrPresent (message = "End date cannot be in the past")
+  @FutureOrPresent(message = "End date cannot be in the past")
   @Column(name = "end_date", nullable = true)
   private LocalDate endDate;
 
-  @NotBlank (message = "Supervisor name is required")
-  @Column (nullable = false)
+  @NotBlank(message = "Supervisor name is required")
+  @Column(nullable = false)
   private String supervisor;
 
-
-  
   public Employee() {
   }
-
 
   public Employee(Title title,
       @NotBlank(message = "First name is required") @Size(min = 2, max = 100, message = "First name must be between 2 and 100 characters") String firstName,
@@ -108,11 +105,9 @@ public class Employee {
     this.supervisor = supervisor;
   }
 
-  public boolean isOngoing() {
-    return endDate == null;
+  public boolean isOngoing(LocalDate now) {
+    return endDate == null || !endDate.isBefore(now);
   }
-
-
 
   public Long getId() {
     return id;

@@ -14,19 +14,20 @@ import com.jasminejisu.employeeapp.employee.entities.Title;
 
 public class EmployeeEntityTest {
   private static final LocalDate endDate = null;
+  private static final LocalDate today = LocalDate.of(2026, 1, 1);
 
   @Test
   @DisplayName ("end date is null")
   void isOngoing_whenEndDateIsNull_isTrue() {
     Employee employee = new Employee(Title.MANAGER, "null", null, "null", "null", "null", "null", ContractType.CONTRACT, LocalDate.now(), endDate, "null");
-    assertTrue(employee.isOngoing());
+    assertTrue(employee.isOngoing(today));
   }
 
   @Test
   @DisplayName ("end date is not null")
   void isOngoing_whenEndDateIsNotNull_isFalse() {
     Employee employee = new Employee(Title.MANAGER, "null", null, "null", "null", "null", "null", ContractType.CONTRACT, LocalDate.now(), LocalDate.now(), "null");
-    assertFalse(employee.isOngoing());
+    assertFalse(employee.isOngoing(today));
   }
 
 }
